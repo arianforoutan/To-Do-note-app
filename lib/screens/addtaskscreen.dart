@@ -178,10 +178,14 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                   var taskTitle = controllerTaskTitle.text;
                   var tasksubTitle = controllerTasksubtitle.text;
                   addTask(taskTitle, tasksubTitle);
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: ((context) {
-                    return HomeScreen();
-                  })));
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: ((context) {
+                        return HomeScreen();
+                      }),
+                    ),
+                  );
                 },
                 child: Text(
                   'اضافه کردن تسک',
@@ -200,6 +204,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
         title: taskTitle,
         subTitle: tasksubTitle,
         time: _time!,
+        tasktime: 10,
         taskType: getTaskTypeList()[_selectedTaskTypeItem]);
 
     box.add(task);
