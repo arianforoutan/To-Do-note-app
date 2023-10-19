@@ -1,3 +1,4 @@
+import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:msh_checkbox/msh_checkbox.dart';
 import 'package:note/screens/edit_task_screen.dart';
@@ -46,7 +47,7 @@ class _TaskWidgetState extends State<TaskWidget> {
             borderRadius: BorderRadius.circular(10),
           ),
           child: Padding(
-            padding: EdgeInsets.all(12.0),
+            padding: EdgeInsets.all(8.0),
             child: getRowTaskItem(),
           ),
         ),
@@ -81,47 +82,157 @@ class _TaskWidgetState extends State<TaskWidget> {
                   ),
                 ],
               ),
-              SizedBox(
-                height: 25,
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: Color.fromARGB(80, 13, 40, 116),
-                      elevation: 0,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20)),
-                      side: BorderSide(
-                        width: 2,
-                        color: Color.fromARGB(195, 5, 25, 80),
-                      )),
-                  onPressed: (() {
-                    showModalBottomSheet(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20)),
-                        isScrollControlled: true,
-                        barrierColor: Colors.transparent,
-                        backgroundColor: Color.fromARGB(195, 193, 240, 236),
-                        context: context,
-                        builder: (BuildContext context) {
-                          return Padding(
-                            padding: const EdgeInsets.all(20.0),
-                            child: SizedBox(
-                              height: MediaQuery.of(context).size.height / 2,
-                              child: Text(
-                                widget.task.subTitle,
-                                style: TextStyle(fontSize: 20),
-                              ),
-                            ),
-                          );
-                        });
-                  }),
-                  child: Text(
-                    'توضیحات',
-                    style: TextStyle(
-                      fontSize: 12,
-                      color: Color.fromARGB(195, 5, 25, 80),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  SizedBox(
+                    height: 25,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: Color.fromARGB(80, 13, 40, 116),
+                          elevation: 0,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20)),
+                          side: BorderSide(
+                            width: 2,
+                            color: Color.fromARGB(195, 5, 25, 80),
+                          )),
+                      onPressed: (() {
+                        showModalBottomSheet(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20)),
+                            isScrollControlled: true,
+                            barrierColor: Colors.transparent,
+                            backgroundColor: Color.fromARGB(195, 193, 240, 236),
+                            context: context,
+                            builder: (BuildContext context) {
+                              return Padding(
+                                padding: const EdgeInsets.all(20.0),
+                                child: SizedBox(
+                                  height:
+                                      MediaQuery.of(context).size.height / 2,
+                                  child: SingleChildScrollView(
+                                    scrollDirection: Axis.vertical,
+                                    child: Column(
+                                      children: [
+                                        Text(
+                                          widget.task.subTitle,
+                                          style: TextStyle(fontSize: 20),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              );
+                            });
+                      }),
+                      child: Text(
+                        'توضیحات',
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: Color.fromARGB(195, 5, 25, 80),
+                        ),
+                      ),
                     ),
                   ),
-                ),
+                  SizedBox(
+                    height: 25,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: Color.fromARGB(80, 48, 179, 172),
+                          elevation: 0,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20)),
+                          side: BorderSide(
+                            width: 2,
+                            color: Color.fromARGB(195, 3, 95, 60),
+                          )),
+                      onPressed: (() {
+                        showModalBottomSheet(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20)),
+                            isScrollControlled: true,
+                            barrierColor: Colors.transparent,
+                            backgroundColor: Colors.transparent,
+                            context: context,
+                            builder: (BuildContext context) {
+                              return Padding(
+                                padding: const EdgeInsets.all(20.0),
+                                child: SizedBox(
+                                  height:
+                                      MediaQuery.of(context).size.height / 2,
+                                  child: SingleChildScrollView(
+                                    scrollDirection: Axis.vertical,
+                                    child: Column(
+                                      children: [
+                                        CircularCountDownTimer(
+                                          duration: 10,
+                                          initialDuration: 0,
+                                          controller: CountDownController(),
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              2,
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height /
+                                              2,
+                                          ringColor: Colors.grey[300]!,
+                                          ringGradient: null,
+                                          fillColor: Colors.green[300]!,
+                                          fillGradient: null,
+                                          backgroundColor: Colors.teal[800],
+                                          backgroundGradient: null,
+                                          strokeWidth: 10.0,
+                                          strokeCap: StrokeCap.round,
+                                          textStyle: TextStyle(
+                                              fontSize: 33.0,
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold),
+                                          textFormat: CountdownTextFormat.S,
+                                          isReverse: false,
+                                          isReverseAnimation: false,
+                                          isTimerTextShown: true,
+                                          autoStart: true,
+                                          onStart: () {
+                                            debugPrint('Countdown Started');
+                                          },
+                                          onComplete: () {
+                                            debugPrint('Countdown Ended');
+                                          },
+                                          onChange: (String timeStamp) {
+                                            debugPrint(
+                                                'Countdown Changed $timeStamp');
+                                          },
+                                          timeFormatterFunction:
+                                              (defaultFormatterFunction,
+                                                  duration) {
+                                            if (duration.inSeconds == 0) {
+                                              return "Start";
+                                            } else {
+                                              return Function.apply(
+                                                  defaultFormatterFunction,
+                                                  [duration]);
+                                            }
+                                          },
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              );
+                            });
+                      }),
+                      child: Text(
+                        'شروع',
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: Color.fromARGB(195, 3, 95, 60),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
               Spacer(),
               getTimeandEditBadgs(),
