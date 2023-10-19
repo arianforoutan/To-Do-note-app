@@ -166,7 +166,9 @@ class _TaskWidgetState extends State<TaskWidget> {
                                     child: Column(
                                       children: [
                                         CircularCountDownTimer(
-                                          duration: 10,
+                                          duration:
+                                              int.parse(widget.task.tasktime) *
+                                                  60,
                                           initialDuration: 0,
                                           controller: CountDownController(),
                                           width: MediaQuery.of(context)
@@ -210,9 +212,7 @@ class _TaskWidgetState extends State<TaskWidget> {
                                             if (duration.inSeconds == 0) {
                                               return "Start";
                                             } else {
-                                              return Function.apply(
-                                                  defaultFormatterFunction,
-                                                  [duration]);
+                                              return '';
                                             }
                                           },
                                         ),

@@ -27,5 +27,5 @@ class Task extends HiveObject {
   TaskType taskType;
 
   @HiveField(5)
-  int tasktime;
+  String tasktime;
 }

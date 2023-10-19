@@ -24,11 +24,13 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
 
   FocusNode negahdar1 = FocusNode();
   FocusNode negahdar2 = FocusNode();
+  FocusNode negahdar3 = FocusNode();
 
   int _selectedTaskTypeItem = 0;
 
   TextEditingController? controllerTaskTitle;
   TextEditingController? controllerTasksubtitle;
+  TextEditingController? controllerTasktime;
   DateTime? _time;
 
   @override
@@ -37,6 +39,7 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
     controllerTaskTitle = TextEditingController(text: widget.task.title);
 
     controllerTasksubtitle = TextEditingController(text: widget.task.subTitle);
+    controllerTasktime = TextEditingController(text: widget.task.tasktime);
 
     negahdar1.addListener(() {
       setState(() {});
@@ -153,6 +156,46 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
                   onNegativePressed: (context) {},
                 ),
               ),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 100, vertical: 10),
+                child: Directionality(
+                  textDirection: TextDirection.rtl,
+                  child: TextField(
+                    keyboardType: TextInputType.number,
+                    controller: controllerTasktime,
+                    maxLines: 1,
+                    focusNode: negahdar3,
+                    decoration: InputDecoration(
+                      contentPadding:
+                          EdgeInsets.symmetric(vertical: 5, horizontal: 15),
+                      labelText: 'مدت زمان',
+                      hintText: 'به دقیقه',
+                      labelStyle: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 12,
+                        color: negahdar2.hasFocus
+                            ? Color.fromARGB(255, 54, 221, 213)
+                            : Color.fromARGB(255, 21, 151, 211),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15),
+                        borderSide: BorderSide(
+                          color: Color.fromARGB(255, 21, 151, 211),
+                          width: 3,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15),
+                        borderSide: BorderSide(
+                          width: 3,
+                          color: Color.fromARGB(255, 54, 221, 213),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
               Container(
                 height: 150,
                 child: ListView.builder(
@@ -183,9 +226,10 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
                   backgroundColor: Color.fromARGB(255, 54, 221, 213),
                 ),
                 onPressed: () {
+                  var tasktime = controllerTasktime!.text;
                   var taskTitle = controllerTaskTitle!.text;
                   var tasksubTitle = controllerTasksubtitle!.text;
-                  editTask(taskTitle, tasksubTitle);
+                  editTask(taskTitle, tasksubTitle, tasktime);
                   Navigator.push(context,
                       MaterialPageRoute(builder: ((context) {
                     return HomeScreen();
@@ -203,11 +247,12 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
     );
   }
 
-  editTask(String taskTitle, String tasksubTitle) {
+  editTask(String taskTitle, String tasksubTitle, String tasktime) {
     widget.task.title = taskTitle;
     widget.task.subTitle = tasksubTitle;
     widget.task.time = _time!;
     widget.task.taskType = getTaskTypeList()[_selectedTaskTypeItem];
+    widget.task.tasktime = tasktime;
     widget.task.save();
   }
 }
