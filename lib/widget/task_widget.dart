@@ -56,7 +56,6 @@ class _TaskWidgetState extends State<TaskWidget> {
 
   Widget getRowTaskItem() {
     return Row(
-      // crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
         Expanded(
