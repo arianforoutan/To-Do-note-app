@@ -81,42 +81,44 @@ class _TaskWidgetState extends State<TaskWidget> {
                   ),
                 ],
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 10, bottom: 5),
-                child: SizedBox(
-                  height: 25,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Color.fromARGB(195, 7, 34, 109),
+              SizedBox(
+                height: 25,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Color.fromARGB(80, 13, 40, 116),
                       elevation: 0,
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(50),
-                      ),
-                    ),
-                    onPressed: (() {
-                      showModalBottomSheet(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20)),
-                          isScrollControlled: true,
-                          barrierColor: Colors.transparent,
-                          backgroundColor: Color.fromARGB(195, 193, 240, 236),
-                          context: context,
-                          builder: (BuildContext context) {
-                            return Padding(
-                              padding: const EdgeInsets.all(20.0),
-                              child: SizedBox(
-                                height: MediaQuery.of(context).size.height / 2,
-                                child: Text(
-                                  widget.task.subTitle,
-                                  style: TextStyle(fontSize: 20),
-                                ),
+                          borderRadius: BorderRadius.circular(20)),
+                      side: BorderSide(
+                        width: 2,
+                        color: Color.fromARGB(195, 5, 25, 80),
+                      )),
+                  onPressed: (() {
+                    showModalBottomSheet(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20)),
+                        isScrollControlled: true,
+                        barrierColor: Colors.transparent,
+                        backgroundColor: Color.fromARGB(195, 193, 240, 236),
+                        context: context,
+                        builder: (BuildContext context) {
+                          return Padding(
+                            padding: const EdgeInsets.all(20.0),
+                            child: SizedBox(
+                              height: MediaQuery.of(context).size.height / 2,
+                              child: Text(
+                                widget.task.subTitle,
+                                style: TextStyle(fontSize: 20),
                               ),
-                            );
-                          });
-                    }),
-                    child: Text(
-                      'توضیحات',
-                      style: TextStyle(fontSize: 12),
+                            ),
+                          );
+                        });
+                  }),
+                  child: Text(
+                    'توضیحات',
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: Color.fromARGB(195, 5, 25, 80),
                     ),
                   ),
                 ),
