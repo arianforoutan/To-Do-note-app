@@ -193,7 +193,7 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
                 },
                 child: Text(
                   ' ویرایش تسک',
-                  style: Theme.of(context).textTheme.headline1,
+                  style: Theme.of(context).textTheme.displayLarge,
                 ),
               ),
             ],
