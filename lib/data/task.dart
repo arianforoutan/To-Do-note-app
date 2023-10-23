@@ -10,7 +10,8 @@ class Task extends HiveObject {
       required this.subTitle,
       this.isDone = false,
       required this.taskType,
-      required this.time});
+      required this.time,
+      required this.tasktime});
 
   @HiveField(0)
   String title;
@@ -24,4 +25,7 @@ class Task extends HiveObject {
 
   @HiveField(4)
   TaskType taskType;
+
+  @HiveField(5)
+  String tasktime;
 }

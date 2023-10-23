@@ -21,14 +21,17 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
   final box = Hive.box<Task>('taskbox');
 
   DateTime? _time;
+  int? _duration;
 
   int _selectedTaskTypeItem = 0;
 
   FocusNode negahdar1 = FocusNode();
   FocusNode negahdar2 = FocusNode();
+  FocusNode negahdar3 = FocusNode();
 
   final TextEditingController controllerTaskTitle = TextEditingController();
   final TextEditingController controllerTasksubtitle = TextEditingController();
+  final TextEditingController controllerTasktime = TextEditingController();
 
   @override
   void initState() {
@@ -145,6 +148,46 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                   onNegativePressed: (context) {},
                 ),
               ),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 100, vertical: 10),
+                child: Directionality(
+                  textDirection: TextDirection.rtl,
+                  child: TextField(
+                    keyboardType: TextInputType.number,
+                    controller: controllerTasktime,
+                    maxLines: 1,
+                    focusNode: negahdar3,
+                    decoration: InputDecoration(
+                      contentPadding:
+                          EdgeInsets.symmetric(vertical: 5, horizontal: 15),
+                      labelText: 'مدت زمان',
+                      hintText: 'به دقیقه',
+                      labelStyle: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 12,
+                        color: negahdar2.hasFocus
+                            ? Color.fromARGB(255, 54, 221, 213)
+                            : Color.fromARGB(255, 21, 151, 211),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15),
+                        borderSide: BorderSide(
+                          color: Color.fromARGB(255, 21, 151, 211),
+                          width: 3,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15),
+                        borderSide: BorderSide(
+                          width: 3,
+                          color: Color.fromARGB(255, 54, 221, 213),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
               Container(
                 height: 150,
                 child: ListView.builder(
@@ -175,13 +218,18 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                   backgroundColor: Color.fromARGB(255, 54, 221, 213),
                 ),
                 onPressed: () {
+                  var tasktime = controllerTasktime.text;
                   var taskTitle = controllerTaskTitle.text;
                   var tasksubTitle = controllerTasksubtitle.text;
-                  addTask(taskTitle, tasksubTitle);
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: ((context) {
-                    return HomeScreen();
-                  })));
+                  addTask(taskTitle, tasksubTitle, tasktime);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: ((context) {
+                        return HomeScreen();
+                      }),
+                    ),
+                  );
                 },
                 child: Text(
                   'اضافه کردن تسک',
@@ -195,11 +243,12 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
     );
   }
 
-  addTask(String taskTitle, String tasksubTitle) {
+  addTask(String taskTitle, String tasksubTitle, String tasktime) {
     var task = Task(
         title: taskTitle,
         subTitle: tasksubTitle,
         time: _time!,
+        tasktime: tasktime,
         taskType: getTaskTypeList()[_selectedTaskTypeItem]);
 
     box.add(task);
