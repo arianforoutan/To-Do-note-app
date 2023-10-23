@@ -210,7 +210,7 @@ class _TaskWidgetState extends State<TaskWidget> {
                                               (defaultFormatterFunction,
                                                   duration) {
                                             if (duration.inSeconds == 0) {
-                                              return "Start";
+                                              return "شروع";
                                             } else if (duration.inSeconds > 0 &&
                                                 duration.inSeconds <
                                                     int.parse(widget
@@ -221,7 +221,7 @@ class _TaskWidgetState extends State<TaskWidget> {
                                                 int.parse(
                                                         widget.task.tasktime) *
                                                     60) {
-                                              return 'Finish';
+                                              return 'پایان';
                                             }
                                           },
                                         ),
